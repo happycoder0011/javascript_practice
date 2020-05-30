@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>CLOCK</title>
+        <style>
+            span
+            {
+            border: .1rem solid pink;
+            border-radius: .5rem;
+            margin: 2rem;
+            display: inline-flex;
+            font-size: 1.5rem;
+            padding: 1rem 1rem ;
+            transition: all .07s ease;
+            width: 10rem;
+            text-align: center;
+            color:black;
+            background: rgba(228, 138, 193, 0.4);
+            text-shadow: 0 0 2rem maroon;
+            }
+            </style>
+    </head>
+    <body>
+
+        <div class=calender>
+            <span id="date">date</span>
+            <span id="day">day</span>
+            <span id="month">month </span>
+            <span id="year">year</span>
+        </div>
+        <div class="clock">
+            <div class="clock-face">
+                <div class="hand1 hour-hand"></div>
+                <div class="hand2 min-hand"></div>
+                <div class="hand3 second-hand"></div>
+            </div>
+        </div>
+    </body>
+
+    <style>
+        html
+        {
+            background: rgb(63,94,251);
+            background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
+            font-family: 'helvetica neue';
+            text-align: center;
+            font-size: 10px;
+
+        }
+
+        body
+        {
+            margin: 0;
+            font-size: 2rem;
+            display:flex;
+            flex: 1;
+            min-height: 100vh;
+            align-items: center;
+        }
+
+        .clock
+        {
+            width: 30rem;
+            height:30rem;
+            border: 20px solid purple;
+            border-radius: 50%;
+            margin: 50px auto;
+            position: relative;
+            padding: 2rem;
+            box-shadow: 
+                0 0 5px 4px pink,
+                inset 0 0 0 15px maroon,
+                inset 0 0 50px black,
+                0 0 50px green; 
+        }
+        .clock-face
+        {
+            position: relative;
+            width: 100% ;
+            height: 100% ;
+            transform: translate(-3px);
+        }
+        .hand1
+        {
+            width: 35%;
+            height: 8px;
+            background: pink ;
+            position : absolute;
+            top : 50%;
+            right: 50%;
+            transform-origin: 100%;
+            transform: rotate(90deg);
+            transition:all 0.05s;
+            transition-timing-function: cubic-bezier(0.1,2.7,0.58,1);
+        }
+        .hand2
+        {
+            width: 45%;
+            height: 5px;
+            background: pink ;
+            position : absolute;
+            top : 50%;
+            right: 50%;
+            transform-origin: 100%;
+            transform: rotate(90deg);
+            transition:all 0.05s;
+            transition-timing-function: cubic-bezier(0.1,2.7,0.58,1);
+        }
+
+        .hand3
+        {
+            width: 45%;
+            height: 3px;
+            background: pink ;
+            position : absolute;
+            top : 50%;
+            right: 50%;
+            transform-origin: 100%;
+            transform: rotate(90deg);
+            transition:all 0.05s;
+            transition-timing-function: cubic-bezier(0.1,2.7,0.58,1);
+        }
+    </style>
+
+    <script >
+        const secondhand = document.querySelector('.second-hand');
+        const minutehand = document.querySelector('.min-hand');
+        const hourhand = document.querySelector('.hour-hand');
+        function setDate()
+        {
+            const now = new Date();
+            let m,z;
+
+            const seconds = now.getSeconds();
+            const seconddeg = (seconds/60)*360  + 90; 
+            secondhand.style.transform =`rotate(${seconddeg}deg)`;
+
+            const mins = now.getMinutes();
+            const mindeg =((mins/60)*360) + ((seconds/60)*6) + 90;
+            minutehand.style.transform = `rotate(${mindeg}deg)`;
+
+            const hour = now.getHours();
+            const hourdeg = ((hour/12)*360) + ((mins/60)*30) + 90;
+            hourhand.style.transform = `rotate(${hourdeg}deg)`; 
+
+            const date = now.getDate();
+            
+           
+            
+            var dateh = document.getElementById("date"); 
+            dateh.textContent = `${date}`;
+
+
+            const day = now.getDay();
+            switch(day) {
+                case 0:
+                    m = "SUNDAY";
+                    break;
+                case 1:
+                    m = "MONDAY";
+                    break;
+                case 2:
+                    m = "TUESDAY";
+                    break;
+                 case 3:
+                 m = "WEDNESDAY";
+                    break;
+                case 4:
+                m = "THURSDAY";
+                    break;
+                    case 5:
+                    m = "FRIDAY";
+                    break;
+                case 6:
+                m = "SATURDAY";
+                    break;
+                               
+                
+                default:
+                    m="error";
+                }
+
+            var dayh = document.getElementById("day"); 
+            dayh.textContent = `${m}`;
+            
+
+             const year = now.getFullYear();
+            
+            var yearh = document.getElementById("year"); 
+            yearh.textContent = `${year}`; 
+
+            const month = now.getMonth();
+            switch(month) {
+                case 0:
+                    z = "JANUARY";
+                    break;
+                case 1:
+                    z = "FEBRUARY";
+                    break;
+                case 2:
+                z = "MARCH";
+                    break;
+                 case 3:
+                 z = "APRIL";
+                    break;
+                case 4:
+                z = "MAY";
+                    break;
+                    case 5:
+                    z = "JUNE";
+                    break;
+                case 6:
+                z = "JULY";
+                    break;
+                    case 7:
+                    z = "AUGUST";
+                    break;
+                case 2:
+                z = "SEPTEMBER";
+                    break;
+                 case 3:
+                 z = "OCTOBER";
+                    break;
+                case 4:
+                z = "NOVEMBER";
+                    break;
+                    case 5:
+                    z = "DECEMBER";
+                    break;            
+                
+                default:
+                    z="error";
+                }
+
+            var monthh = document.getElementById("month"); 
+            monthh.textContent = `${z}`;
+
+        }
+        setInterval(setDate,1000);
+        setDate();
+    </script>
+</html>
